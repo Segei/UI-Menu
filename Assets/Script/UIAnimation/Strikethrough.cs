@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Assets.Script.UIAnimation
@@ -8,8 +9,10 @@ namespace Assets.Script.UIAnimation
     {
         [SerializeField] private Image strikethroughLine;
         [SerializeField] private float timeTransition = 0.5f;
+        private bool fill = true;
 
-        private bool fill;
+        public UnityEvent<bool> OnChangeState;
+
 
         public void SwitchState()
         {
@@ -19,7 +22,7 @@ namespace Assets.Script.UIAnimation
         public void SetValue(bool value)
         {
             fill = value;
-            if (fill)
+            if (!value)
             {
                 Fill();
             }
@@ -27,6 +30,7 @@ namespace Assets.Script.UIAnimation
             {
                 Empty();
             }
+            OnChangeState?.Invoke(value);
         }
 
         private void Fill()

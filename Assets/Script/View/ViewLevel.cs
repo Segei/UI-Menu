@@ -12,10 +12,6 @@ namespace Assets.Script.View
         [SerializeField] private TMP_Text number;
         [SerializeField] private Level level;
 
-        private void Start()
-        {
-            SetLevel(level);
-        }
 
         private void OnValidate()
         {
@@ -24,6 +20,7 @@ namespace Assets.Script.View
 
         public void SetLevel(Level level)
         {
+            this.level = level;
             int i = 0;
             for (; i < level.CountStar; i++)
             {
